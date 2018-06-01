@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="adds")
-public class Adds {
+public class Add {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,16 +18,15 @@ public class Adds {
     @JsonManagedReference
     private Category category;
 
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="username")
     @JsonManagedReference
     private UserName username;
 
-    public Adds() {
+    public Add() {
     }
 
-    public Adds(Category category, UserName username) {
+    public Add(Category category, UserName username) {
         this.category = category;
         this.username = username;
     }

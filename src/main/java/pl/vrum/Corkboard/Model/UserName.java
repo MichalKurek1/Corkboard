@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -28,12 +27,12 @@ public class UserName {
 
     @OneToMany(mappedBy = "username")
     @JsonBackReference
-    private List<Adds> adds;
+    private List<Add> adds;
 
     public UserName() {
     }
 
-    public UserName(@NotBlank(message = "Podaj nazwę użytkownika") String username, @NotBlank(message = "Enter your first name") String firstName, @NotBlank(message = "Enter your last name") String lastName, @NotBlank(message = "Enter your email") @Email(message = "Invalid email") String email, List<Adds> adds) {
+    public UserName(@NotBlank(message = "Podaj nazwę użytkownika") String username, @NotBlank(message = "Enter your first name") String firstName, @NotBlank(message = "Enter your last name") String lastName, @NotBlank(message = "Enter your email") @Email(message = "Invalid email") String email, List<Add> adds) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -73,11 +72,11 @@ public class UserName {
         this.email = email;
     }
 
-    public List<Adds> getAdds() {
+    public List<Add> getAdds() {
         return adds;
     }
 
-    public void setAdds(List<Adds> adds) {
+    public void setAdds(List<Add> adds) {
         this.adds = adds;
     }
 }

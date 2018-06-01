@@ -15,12 +15,12 @@ public class Category {
 
     @OneToMany(mappedBy = "category")
     @JsonBackReference
-    private List<Adds> adds;
+    private List<Add> adds;
 
     public Category() {
     }
 
-    public Category(List<Adds> adds) {
+    public Category(List<Add> adds) {
         this.adds = adds;
     }
 
@@ -32,11 +32,11 @@ public class Category {
         this.id = id;
     }
 
-    public List<Adds> getAdds() {
+    public List<Add> getAdds() {
         return adds;
     }
 
-    public void setAdds(List<Adds> adds) {
+    public void setAdds(List<Add> adds) {
         this.adds = adds;
     }
 }
