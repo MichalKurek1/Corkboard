@@ -13,6 +13,8 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String categoryName;
+
     @OneToMany(mappedBy = "category")
     @JsonBackReference
     private List<Add> adds;
@@ -20,12 +22,21 @@ public class Category {
     public Category() {
     }
 
-    public Category(List<Add> adds) {
+    public Category(String categoryName, List<Add> adds) {
+        this.categoryName = categoryName;
         this.adds = adds;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public void setId(Long id) {

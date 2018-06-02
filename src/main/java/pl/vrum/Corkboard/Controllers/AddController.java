@@ -20,9 +20,9 @@ public class AddController {
         return list;
     }
 
-    @GetMapping("/active")
-    public Iterable<Add> allActiveAdds(){
-        Iterable<Add> list = addRepository.findAllByActiveTrue();
+    @GetMapping("/active/{id}")
+    public Iterable<Add> allActiveAdds(@PathVariable long id){
+        Iterable<Add> list = addRepository.findAllByActiveTrueAndCategory_Id(id);
         return list;
     }
 

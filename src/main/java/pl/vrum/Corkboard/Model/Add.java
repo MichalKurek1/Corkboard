@@ -22,10 +22,11 @@ public class Add {
     @JoinColumn(name = "username")
     @JsonManagedReference
     private UserName username;
-    private Boolean active;
+    private boolean active =true;
 
-    private String header;
-    private String description;
+    private String title;
+    private String shortDescription;
+    private String fullDescription;
     private Double price;
     private int number;
 
@@ -33,14 +34,39 @@ public class Add {
     public Add() {
     }
 
-    public Add(Category category, UserName username, Boolean active, String header, String description, Double price, int number) {
+    public Add(Category category, UserName username, boolean active, String title, String shortDescription, String fullDescription, Double price, int number) {
         this.category = category;
         this.username = username;
         this.active = active;
-        this.header = header;
-        this.description = description;
+        this.title = title;
+        this.shortDescription = shortDescription;
+        this.fullDescription = fullDescription;
         this.price = price;
         this.number = number;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+    public String getFullDescription() {
+        return fullDescription;
+    }
+
+    public void setFullDescription(String fullDescription) {
+        this.fullDescription = fullDescription;
     }
 
     public Long getId() {
@@ -67,30 +93,6 @@ public class Add {
         this.username = username;
     }
 
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-    public String getHeader() {
-        return header;
-    }
-
-    public void setHeader(String header) {
-        this.header = header;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public Double getPrice() {
         return price;
     }
@@ -105,5 +107,12 @@ public class Add {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }
