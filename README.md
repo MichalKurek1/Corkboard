@@ -1,5 +1,7 @@
 # Corkboard
 
-Backend for bookstore database management written in Java.
+A corkboard application (backend written in Java, frontend Bootstrap + JS).
+
+In progress
 
 
