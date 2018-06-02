@@ -25,5 +25,21 @@ public class AddController {
         return addRepository.findById(id);
     }
 
+    @PostMapping
+    public Add addAdd(@ModelAttribute("add") Add add){
+        addRepository.save(add);
+        return add;
+    }
 
+    @PutMapping(value = "/{id}")
+    public Add update (@RequestBody Add add, @PathVariable long id){
+        add.setId(id);
+        addRepository.save(add);
+        return add;
+    }
+
+    @DeleteMapping
+    public void deleteBook(@PathVariable long id){
+        addRepository.deleteById(id);
+    }
 }
