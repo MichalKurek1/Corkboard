@@ -20,6 +20,12 @@ public class AddController {
         return list;
     }
 
+    @GetMapping("/active")
+    public Iterable<Add> allActiveAdds(){
+        Iterable<Add> list = addRepository.findAllByActiveTrue();
+        return list;
+    }
+
     @GetMapping("/{id}")
     public Add add(@PathVariable long id){
         return addRepository.findById(id);
@@ -39,7 +45,7 @@ public class AddController {
     }
 
     @DeleteMapping
-    public void deleteBook(@PathVariable long id){
+    public void deleteAdd(@PathVariable long id){
         addRepository.deleteById(id);
     }
 }
