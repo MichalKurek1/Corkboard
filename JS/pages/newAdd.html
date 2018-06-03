@@ -3,18 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../css/shop-item.css" rel="stylesheet">
+
 </head>
 <body>
 
-<form id="uploadForm">
-    <input type="file" name="file" accept="image/*">
-    <input type="submit" id="submit">
-</form>
+<!--<form id="uploadForm">-->
+    <!--<input type="file" name="file" accept="image/*">-->
+    <!--<input type="submit" id="submit">-->
+<!--</form>-->
+
+<div class="container col-lg-4">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Start Bootstrap</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Home
+                        </a>
+                    </li>
+                    <!--<li class="nav-item">-->
+                    <!--<a class="nav-link" href="#">About</a>-->
+                    <!--</li>-->
+                    <!--<li class="nav-item">-->
+                    <!--<a class="nav-link" href="#">Services</a>-->
+                    <!--</li>-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="newAdd.html">New add</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <form id="data">
+        <br>
+        <div class="form-group">
+            <label for="inputUser">Username</label>
+            <input type="text" class="form-control" name="username" id="inputUser" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <label for="inputTitle">Title</label>
+            <input type="text" class="form-control" name="title" id="inputTitle" placeholder="Title">
+        </div>
+        <div class="form-group">
+            <label for="inputShort">Short description</label>
+            <input type="text" maxlength="100" name="shortDescription" class="form-control" id="inputShort" placeholder="Short description">
+        </div>
+        <div class="form-group">
+            <label for="inputFull">Full description</label>
+            <input type="text" name="fullDescription" class="form-control" id="inputFull" placeholder="Full description">
+        </div>
+        <div class="form-group">
+            <label for="inputPrice">Price</label>
+            <input type="number" min="0.00" step="0.01" name="price" id="inputPrice" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="inputNumber">Telephone number</label>
+            <input type="tel" name="number" id="inputNumber" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="inputCategory">Choose category</label>
+            <select name="category" id="inputCategory" class="form-control">
+                <option value=" ">Choose category</option>
+                <option value="1">Cars</option>
+                <option value="2">Parts</option>
+                <option value="3">Wheels</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputFile">Insert photo</label>
+            <input type="file" name="file" accept="image/*" id="exampleInputFile">
+        </div>
+
+        <button type="submit" id="submit" class="btn btn-default">Submit</button>
+    </form>
+
+
+</div><!-- /.container -->
 
 
 <script src="../vendor/jquery/jquery.min.js"></script>
 <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script language="JavaScript" type="text/javascript" src="../js/picture.js"></script>
+<script language="JavaScript" type="text/javascript" src="../js/newAdd.js"></script>
 
 </body>
 </html>

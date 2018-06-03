@@ -29,12 +29,13 @@ public class Add {
     private String fullDescription;
     private Double price;
     private int number;
+    private byte[] image;
 
 
     public Add() {
     }
 
-    public Add(Category category, UserName username, boolean active, String title, String shortDescription, String fullDescription, Double price, int number) {
+    public Add(Category category, UserName username, boolean active, String title, String shortDescription, String fullDescription, Double price, int number, byte[] image) {
         this.category = category;
         this.username = username;
         this.active = active;
@@ -43,6 +44,15 @@ public class Add {
         this.fullDescription = fullDescription;
         this.price = price;
         this.number = number;
+        this.image = image;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     public String getTitle() {

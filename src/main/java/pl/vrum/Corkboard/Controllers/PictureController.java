@@ -8,6 +8,8 @@ import pl.vrum.Corkboard.Repositories.PictureRepository;
 
 import java.io.IOException;
 
+//Controller for tests
+
 @CrossOrigin
 @RestController
 @RequestMapping("/pictures")

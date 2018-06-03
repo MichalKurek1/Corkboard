@@ -37,6 +37,8 @@ $(document).ready(function () {
                 price.text("$ "+result.price);
                 description.text(result.fullDescription);
                 user.text("Contact: "+result.username.firstName+" "+result.number);
+                var rawImageData = result.image;
+                $("#image").attr("src","data:image/gif;base64," + result.image);
             }
         });
 

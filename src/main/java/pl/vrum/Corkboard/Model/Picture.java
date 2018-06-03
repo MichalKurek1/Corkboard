@@ -2,6 +2,8 @@ package pl.vrum.Corkboard.Model;
 
 import javax.persistence.*;
 
+//entity for tests
+
 @Entity
 @Table(name = "pictures")
 public class Picture {

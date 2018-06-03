@@ -2,8 +2,12 @@ package pl.vrum.Corkboard.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import pl.vrum.Corkboard.Model.Add;
+import pl.vrum.Corkboard.Model.Picture;
 import pl.vrum.Corkboard.Repositories.AddRepository;
+
+import java.io.IOException;
 
 
 @CrossOrigin
@@ -32,9 +36,18 @@ public class AddController {
     }
 
     @PostMapping
-    public Add addAdd(@ModelAttribute("add") Add add){
-        addRepository.save(add);
-        return add;
+    public String addAdd(@ModelAttribute("add") Add add, @RequestParam("file") MultipartFile file){
+
+        if (file.isEmpty()) {
+            return "unable to upload";
+        }try {
+            byte[] bytes = file.getBytes();
+            add.setImage(bytes);
+            addRepository.save(add);
+        } catch (IOException e) {
+            return "Error";
+        }
+        return "Success";
     }
 
     @PutMapping(value = "/{id}")
