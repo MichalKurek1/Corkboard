@@ -21,7 +21,7 @@ public class Add {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "username")
     @JsonManagedReference
-    private UserName username;
+    private User username;
     private boolean active =true;
 
     private String title;
@@ -35,7 +35,7 @@ public class Add {
     public Add() {
     }
 
-    public Add(Category category, UserName username, boolean active, String title, String shortDescription, String fullDescription, Double price, int number, byte[] image) {
+    public Add(Category category, User username, boolean active, String title, String shortDescription, String fullDescription, Double price, int number, byte[] image) {
         this.category = category;
         this.username = username;
         this.active = active;
@@ -95,11 +95,11 @@ public class Add {
         this.category = category;
     }
 
-    public UserName getUsername() {
+    public User getUsername() {
         return username;
     }
 
-    public void setUsername(UserName username) {
+    public void setUsername(User username) {
         this.username = username;
     }
 

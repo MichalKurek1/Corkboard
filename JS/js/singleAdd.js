@@ -1,23 +1,6 @@
 $(document).ready(function () {
 
     product();
-    photo();
-
-    function photo() {
-
-        var urlParams = new URLSearchParams(window.location.search);
-        var param = urlParams.get('product');
-
-        $.ajax({
-            url: 'http://localhost:8080/pictures/'+param,
-            type: 'GET',
-            success: function (result) {
-                var rawImageData = result.image;
-                $("#image").attr("src","data:image/gif;base64," + rawImageData);
-            }
-        });
-
-    }
 
     function product() {
         var name = $('#name');

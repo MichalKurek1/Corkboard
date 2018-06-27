@@ -1,9 +1,15 @@
 package pl.vrum.Corkboard.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.vrum.Corkboard.Model.Category;
-import pl.vrum.Corkboard.Repositories.CategoryRepository;
+import pl.vrum.Corkboard.Service.CategoryService;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 @CrossOrigin
 @RestController
@@ -11,35 +17,34 @@ import pl.vrum.Corkboard.Repositories.CategoryRepository;
 public class CategoryController {
 
     @Autowired
-    CategoryRepository categoryRepository;
+    private CategoryService service;
 
-    @GetMapping
-    public Iterable<Category> allCategories(){
-        Iterable<Category> list = categoryRepository.findAll();
-        return list;
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Void> create(@RequestBody @Valid @NotNull Category category){
+        service.create(category);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
-    public Category category(@PathVariable long id){
-        return categoryRepository.findById(id);
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Category get(@PathVariable("id") long id) {
+        return service.find(id);
     }
 
-    @PostMapping
-    public Category categoryAdd(@ModelAttribute("category") Category category){
-        categoryRepository.save(category);
-        return category;
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Void> update(@RequestBody Category category, @PathVariable("id") long id) {
+        service.update(category, id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping(value = "/{id}")
-    public Category update(@RequestBody Category category, @PathVariable Long id ){
-        category.setId(id);
-        categoryRepository.save(category);
-        return category;
+    @RequestMapping(value="/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Category> delete(@PathVariable("id") long id){
+        Category category = service.find(id);
+        if(category==null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        service.delete(id);
+        return new ResponseEntity<>(category,HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteCategory(@PathVariable Long id){
-        categoryRepository.deleteById(id);
-    }
 
 }

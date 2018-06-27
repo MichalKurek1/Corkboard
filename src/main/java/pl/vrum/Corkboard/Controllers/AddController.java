@@ -1,11 +1,12 @@
 package pl.vrum.Corkboard.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import pl.vrum.Corkboard.Model.Add;
-import pl.vrum.Corkboard.Model.Picture;
-import pl.vrum.Corkboard.Repositories.AddRepository;
+import pl.vrum.Corkboard.Service.AddService;
 
 import java.io.IOException;
 
@@ -16,49 +17,54 @@ import java.io.IOException;
 public class AddController {
 
     @Autowired
-    AddRepository addRepository;
+    AddService service;
 
-    @GetMapping
+    @RequestMapping(method = RequestMethod.GET)
     public Iterable<Add> allAdds(){
-        Iterable<Add> list = addRepository.findAll();
+        Iterable<Add> list = service.findAll();
         return list;
     }
 
-    @GetMapping("/active/{id}")
-    public Iterable<Add> allActiveAdds(@PathVariable long id){
-        Iterable<Add> list = addRepository.findAllByActiveTrueAndCategory_Id(id);
+    @RequestMapping(value = "/active/{categoryId}", method = RequestMethod.GET)
+    public Iterable<Add> allActiveAdds(@PathVariable Long categoryId){
+        Iterable<Add> list = service.findAllByActiveTrueAndCategory_Id(categoryId);
         return list;
     }
 
-    @GetMapping("/{id}")
-    public Add add(@PathVariable long id){
-        return addRepository.findById(id);
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public Add add(@PathVariable Long id){
+        return service.find(id);
     }
 
-    @PostMapping
-    public String addAdd(@ModelAttribute("add") Add add, @RequestParam("file") MultipartFile file){
+    @RequestMapping(value="/protected/post", method=RequestMethod.POST)
+    public ResponseEntity<Void> addAdd(@ModelAttribute("add") Add add, @RequestParam("file") MultipartFile file){
 
         if (file.isEmpty()) {
-            return "unable to upload";
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }try {
             byte[] bytes = file.getBytes();
             add.setImage(bytes);
-            addRepository.save(add);
+            service.create(add);
         } catch (IOException e) {
-            return "Error";
+            new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return "Success";
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PutMapping(value = "/{id}")
-    public Add update (@RequestBody Add add, @PathVariable long id){
-        add.setId(id);
-        addRepository.save(add);
-        return add;
+    @RequestMapping(value = "/protected/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Void> update(@RequestBody Add add, @PathVariable Long id){
+        service.update(add, id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping
-    public void deleteAdd(@PathVariable long id){
-        addRepository.deleteById(id);
+    @RequestMapping(value = "/protected/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Add> deleteAdd(@PathVariable Long id){
+        Add add = service.find(id);
+        if(add==null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        service.delete(id);
+        return new ResponseEntity<>(add,HttpStatus.OK);
     }
 }
+

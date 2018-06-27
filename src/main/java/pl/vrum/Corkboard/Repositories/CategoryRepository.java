@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import pl.vrum.Corkboard.Model.Category;
 
 public interface CategoryRepository  extends JpaRepository<Category, Long> {
-    Category findById(long id);
 
+    Category findById(long id);
 }
